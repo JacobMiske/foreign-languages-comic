@@ -1,19 +1,55 @@
 import React from 'react';
-import LatestComic from "../../assets/comics/1.jpg";
-
 
 class Comic extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			counter: 0,
-			file: []
-		}
+			counter: 1,
+			file: [],
+			comic: "./assets/comics/1.png",
+			string: ""
+		};
+		// This binding is necessary to make `this` work in the callback
+		this.firstButton = this.firstButton.bind(this);
+		this.backButton = this.backButton.bind(this);
+		this.randomButton = this.randomButton.bind(this);
+		this.nextButton = this.nextButton.bind(this);
+		this.newestButton = this.newestButton.bind(this);
+	}
+
+	firstButton(props) {
+		const comicString = "./assets/comics/1.png";
+		this.setState({counter: 1});
+		this.setState({comic: comicString});
+	}
+	backButton(props) {
+		this.setState({counter: this.state.counter - 1});
+		const comicString = "./assets/comics/" + this.state.counter + ".png";
+		this.setState({comic: comicString});
+	}
+	randomButton(props) {
+		const min = 1;
+		const max = 5;
+		const rand = Math.round(min + Math.random() * (max - min));
+		this.setState({counter: rand});
+		const comicString = "./assets/comics/" + this.state.counter + ".png";
+		this.setState({comic: comicString});
+
+	}
+	nextButton(props) {
+		this.setState({counter: this.state.counter + 1});
+		const comicString = "./assets/comics/" + this.state.counter + ".png";
+		this.setState({comic: comicString});
+	}
+	newestButton(props) {
+		const comicString = "./assets/comics/5.png";
+		this.setState({counter: 5});
+		this.setState({comic: comicString});
 	}
 
 	render() {
 		return(
-			<div centered class="window" style={{width: "1000px"}}>
+			<div className="window" style={{width: "1000px"}}>
 				<div className="title-bar">
 					<div className="title-bar-text">A Web Comic</div>
 					<div className="title-bar-controls">
@@ -23,21 +59,22 @@ class Comic extends React.Component {
 					</div>
 				</div>
 				<p>
-					<img className={"App-logo"} src={LatestComic} alt="VTC internal design" />
+					<img className={"App-logo"} src={this.state.comic} alt="Current comic" />
 				</p>
-				<button>
+				<h4>{this.state.counter}</h4>
+				<button onClick={this.firstButton}>
 					&lt; &lt; First
 				</button>
-				<button>
+				<button onClick={this.backButton}>
 					&lt; Previous
 				</button>
-				<button>
+				<button onClick={this.randomButton}>
 					Random
 				</button>
-				<button>
+				<button onClick={this.nextButton}>
 					Next &gt;
 				</button>
-				<button>
+				<button onClick={this.newestButton}>
 					Newest &gt; &gt;
 				</button>
 			</div>

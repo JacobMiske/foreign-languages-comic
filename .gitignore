@@ -10,7 +10,7 @@ lerna-debug.log*
 /src/assets/
 
 # nodemodules
-/node_modules
+./node_modules/
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
