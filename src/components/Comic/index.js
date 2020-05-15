@@ -23,9 +23,10 @@ class Comic extends React.Component {
 		this.setState({comic: comicString});
 	}
 	backButton(props) {
-		this.setState({counter: this.state.counter - 1});
-		const comicString = "./assets/comics/" + this.state.counter + ".png";
-		this.setState({comic: comicString});
+		this.setState({counter: this.state.counter - 1}, () => {
+			const comicString = "./assets/comics/" + this.state.counter + ".png";
+			this.setState({comic: comicString});
+		});
 	}
 	randomButton(props) {
 		const min = 1;
@@ -37,46 +38,53 @@ class Comic extends React.Component {
 
 	}
 	nextButton(props) {
-		this.setState({counter: this.state.counter + 1});
-		const comicString = "./assets/comics/" + this.state.counter + ".png";
-		this.setState({comic: comicString});
+		this.setState({counter: this.state.counter + 1}, () => {
+			const comicString = "./assets/comics/" + this.state.counter + ".png";
+			this.setState({comic: comicString});
+		});
+
+
 	}
 	newestButton(props) {
-		const comicString = "./assets/comics/5.png";
-		this.setState({counter: 5});
-		this.setState({comic: comicString});
+		this.setState({counter: 5}, () => {
+			const comicString = "./assets/comics/5.png";
+			this.setState({comic: comicString});
+		});
+
 	}
 
 	render() {
 		return(
-			<div className="window" style={{width: "1000px"}}>
-				<div className="title-bar">
-					<div className="title-bar-text">A Web Comic</div>
-					<div className="title-bar-controls">
-						<button aria-label="Minimize"></button>
-						<button aria-label="Maximize"></button>
-						<button aria-label="Close"></button>
+			<div>
+				<div className="window">
+					<div className="title-bar">
+						<div className="title-bar-text">A Web Comic</div>
+						<div className="title-bar-controls">
+							<button aria-label="Minimize"></button>
+							<button aria-label="Maximize"></button>
+							<button aria-label="Close"></button>
+						</div>
 					</div>
+					<p>
+						<img className={"App-logo"} src={this.state.comic} alt="Current comic" />
+					</p>
+					<h4>{this.state.counter}</h4>
+					<button onClick={this.firstButton}>
+						&lt; &lt; First
+					</button>
+					<button onClick={this.backButton}>
+						&lt; Previous
+					</button>
+					<button onClick={this.randomButton}>
+						Random
+					</button>
+					<button onClick={this.nextButton}>
+						Next &gt;
+					</button>
+					<button onClick={this.newestButton}>
+						Newest &gt; &gt;
+					</button>
 				</div>
-				<p>
-					<img className={"App-logo"} src={this.state.comic} alt="Current comic" />
-				</p>
-				<h4>{this.state.counter}</h4>
-				<button onClick={this.firstButton}>
-					&lt; &lt; First
-				</button>
-				<button onClick={this.backButton}>
-					&lt; Previous
-				</button>
-				<button onClick={this.randomButton}>
-					Random
-				</button>
-				<button onClick={this.nextButton}>
-					Next &gt;
-				</button>
-				<button onClick={this.newestButton}>
-					Newest &gt; &gt;
-				</button>
 			</div>
 
 		)
